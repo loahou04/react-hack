@@ -8,7 +8,8 @@ const fetch = window.fetch;
 const headers = {
   "Access-Control-Allow-Origin": '*',
   'Access-Control-Allow-Methods': 'GET, POST, DELETE, PUT, OPTION',
-  'Access-Control-Allow-Headers': 'Content-Type'
+  'Access-Control-Allow-Headers': 'Content-Type',
+  'Content-Type': "application/json"
 };
 
 function App() {
@@ -32,7 +33,7 @@ function App() {
 
   const clickHandler = (e) => {
     if (firstName && lastName && email) {
-      fetch(`${host}/api/HungHttpTrigger`, {
+      fetch(`${host}/api/HungHttpTrigger?name=hello`, {
         mode: 'cors',
         headers
       })
