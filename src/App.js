@@ -34,11 +34,11 @@ function App() {
   const clickHandler = (e) => {
     if (firstName && lastName && email) {
       fetch(`${host}/api/HungHttpTrigger?name=hello`, {
+        method: 'POST',
         mode: 'cors',
         headers
       })
-      .then(response => response.json())
-      .then(data => console.log(data));
+      .then(data => console.log('success', data.status));
     }
 
   };
