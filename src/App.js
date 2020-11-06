@@ -41,6 +41,7 @@ function App() {
 
   return (
     <div className="App">
+      <img src="innovationjam.png" alt="background" className="background-image"/>
       <div><TextField type="text" label="userId" value={userId} onChange={handleUserId} /> </div>
       <div><TextField type="text" label="content" value={content} onChange={handleContent} />  </div>
       <div className="button-form">
