@@ -2,7 +2,7 @@ import { Button, TextField } from '@material-ui/core';
 import React, { useState } from 'react';
 import './App.css';
 
-const host = "https://hungfirsthttptrigger.azurewebsites.net";
+const host = "https://document-receiver.azurewebsites.net";
 // const host = "http://localhost:7071"
 const fetch = window.fetch;
 const headers = {
@@ -14,26 +14,21 @@ const headers = {
 
 function App() {
 
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
+  const [userId, setUserId] = useState('');
+  const [content, setContent] = useState('');
 
-  const handleFirstNameChange = (e) => {
-    const newFirstName = e.target.value;
-    setFirstName(newFirstName);
+  const handleUserId = (e) => {
+    const userId = e.target.value;
+    setUserId(userId);
   }
-  const handleLastNameChange = (e) => {
-    const newLastName = e.target.value;
-    setLastName(newLastName);
-  }
-  const handleEmailChange = (e) => {
-    const newEmail = e.target.value;
-    setEmail(newEmail);
+  const handleContent = (e) => {
+    const content = e.target.value;
+    setContent(content);
   }
 
   const clickHandler = (e) => {
-    if (firstName && lastName && email) {
-      fetch(`${host}/api/HungHttpTrigger?name=hello`, {
+    if (userId && content) {
+      fetch(`${host}/api/DocumentReceiver`, {
         method: 'POST',
         mode: 'cors',
         headers
@@ -45,9 +40,8 @@ function App() {
 
   return (
     <div className="App">
-      <div><TextField type="text" label="first name" value={firstName} onChange={handleFirstNameChange} /> </div>
-      <div><TextField type="text" label="last name" value={lastName} onChange={handleLastNameChange} />  </div>
-      <div><TextField type="text" label="email" value={email} onChange={handleEmailChange} /> </div>
+      <div><TextField type="text" label="userId" value={userId} onChange={handleUserId} /> </div>
+      <div><TextField type="text" label="content" value={content} onChange={handleContent} />  </div>
       <div className="button-form">
         <Button color="primary" onClick={clickHandler}>Submit</Button>
       </div>
