@@ -31,7 +31,8 @@ function App() {
       fetch(`${host}/api/DocumentReceiver`, {
         method: 'POST',
         mode: 'cors',
-        headers
+        headers,
+        body: JSON.stringify({userId, content})
       })
       .then(data => console.log('success', data.status));
     }
