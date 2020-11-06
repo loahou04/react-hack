@@ -1,5 +1,15 @@
-import './App.css';
+import { Button, TextField } from '@material-ui/core';
 import React, { useState } from 'react';
+import './App.css';
+
+const host = "https://hungfirsthttptrigger.azurewebsites.net";
+// const host = "http://localhost:7071"
+const fetch = window.fetch;
+const headers = {
+  "Access-Control-Allow-Origin": '*',
+  'Access-Control-Allow-Methods': 'GET, POST, DELETE, PUT, OPTION',
+  'Access-Control-Allow-Headers': 'Content-Type'
+};
 
 function App() {
 
@@ -21,18 +31,25 @@ function App() {
   }
 
   const clickHandler = (e) => {
-    console.log(firstName);
-    console.log(lastName);
-    console.log(email);
+    if (firstName && lastName && email) {
+      fetch(`${host}/api/HungHttpTrigger`, {
+        mode: 'cors',
+        headers
+      })
+      .then(response => response.json())
+      .then(data => console.log(data));
+    }
 
   };
 
   return (
     <div className="App">
-      <div>first name <input type="text" value={firstName} onChange={handleFirstNameChange} /> </div> 
-      <div>last name <input type="text" value={lastName} onChange={handleLastNameChange} /> </div> 
-      <div>email name <input type="text" value={email} onChange={handleEmailChange} /> </div> 
-      <button onClick={clickHandler}>Submit</button>
+      <div><TextField type="text" label="first name" value={firstName} onChange={handleFirstNameChange} /> </div>
+      <div><TextField type="text" label="last name" value={lastName} onChange={handleLastNameChange} />  </div>
+      <div><TextField type="text" label="email" value={email} onChange={handleEmailChange} /> </div>
+      <div className="button-form">
+        <Button color="primary" onClick={clickHandler}>Submit</Button>
+      </div>
     </div>
   );
 }
